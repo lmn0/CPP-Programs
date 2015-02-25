@@ -1,0 +1,29 @@
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+
+int n,a[1000],i,j=0,b[1000];
+cin>>n;
+for(i=0;i<n;i++)
+{cin>>a[i];b[i]=i;}
+
+for(i=0;i<n;)
+{
+cout<<i+1;
+j=i;
+do
+{
+b[j]=-1;
+cout<<a[j];
+j=a[j]-1;
+}while(j!=i);
+cout<<endl;
+for(i=0;;i++)
+if(b[i]!=-1)
+{i=b[i];break;}
+}
+
+getch();
+}
+

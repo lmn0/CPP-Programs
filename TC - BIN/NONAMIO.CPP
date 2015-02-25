@@ -1,0 +1,214 @@
+#include<all.h>
+#include<fstream.h>
+int score=0,bonus=0;
+class name
+{
+public:
+char buffer[100];
+int tot,x,y,k;
+name()
+{
+}
+
+void first()
+{tot=0;k=1;x=10;y=60;}
+
+
+void accept();
+void cal()
+{
+tot=score+bonus;
+}
+void disp();
+
+}n;
+void name::disp()
+{
+char c[3];
+
+outtextxy(100,10,"Score Board");
+
+switch(k/10)
+{
+case 0:c[0]='0';break;
+case 1:c[0]='1';break;
+case 2:c[0]='2';break;
+case 3:c[0]='3';break;
+case 4:c[0]='4';break;
+case 5:c[0]='5';break;
+case 6:c[0]='6';break;
+case 7:c[0]='7';break;
+case 8:c[0]='8';break;
+case 9:c[0]='9';break;
+}
+
+switch(k%10)
+{
+case 0:c[1]='0';break;
+case 1:c[1]='1';break;
+case 2:c[1]='2';break;
+case 3:c[1]='3';break;
+case 4:c[1]='4';break;
+case 5:c[1]='5';break;
+case 6:c[1]='6';break;
+case 7:c[1]='7';break;
+case 8:c[1]='8';break;
+case 9:c[1]='9';break;
+}         c[2]='\0';
+
+char c2[4];int er,yu;
+	        yu=tot;
+for(er=3;er>=0;er--)
+{
+switch(yu%10)
+{
+case 0:c2[er]='0';break;
+case 1:c2[er]='1';break;
+case 2:c2[er]='2';break;
+case 3:c2[er]='3';break;
+case 4:c2[er]='4';break;
+case 5:c2[er]='5';break;
+case 6:c2[er]='6';break;
+case 7:c2[er]='7';break;
+case 8:c2[er]='8';break;
+case 9:c2[er]='9';break;
+}
+yu=yu/10;
+}                   c2[4]='\0';
+
+outtextxy(x,y,c);outtextxy(x+textwidth(c)+30,y,buffer);outtextxy(x+textwidth(buffer)+textwidth(c)+30+30,y,c2);
+
+}
+
+void name::accept()
+{
+int width=10;
+	int height=10,x=65;
+	int cursor=x,i=0;
+	char ch;
+	int y=40,fore=30,back=BLACK,limit=99;
+	buffer[0]='\0';
+	setcolor(fore);
+	setfillstyle(1,back);
+
+	settextstyle(2,0,7);
+	outtextxy(10,10,"Enter your details :");
+	outtextxy(10,30,"Name:");
+
+
+	while(1)
+	{
+		//If you donot want to diplay a flashing cursor, then remove
+		//the kbhit() while loop
+		///*
+		while(!kbhit())
+		{
+			setcolor(10);
+			line(cursor,y+height,cursor+width,y+height);
+			delay(200);
+			//clear out a rectangle of widthXheight
+			setcolor(back);
+			setfillstyle(1,back);
+			int a[8];
+			a[0]=cursor;
+			a[1]=y;
+			a[2]=cursor+width;
+			a[3]=y;
+			a[4]=cursor+width;
+			a[5]=y+height+1;
+			a[6]=cursor;
+			a[7]=y+height+1;
+			fillpoly(4,a);
+			delay(200);
+		}
+		//till here*/
+
+		ch=getch();sound(2000);delay(50);nosound();
+		if( isprint(ch) )
+		{
+			if(i<limit)
+			{
+			buffer[i++]=ch;
+			buffer[i]='\0';
+
+			char tempstr[2]={ch,'\0'};
+
+			//If you want to input a password,
+			//then replace the above line with:
+			//char tempstr[2]={'*','\0'};
+
+			//clear out a rectangle of widthXheight
+			setcolor(back);
+			setfillstyle(1,back);
+			int a[8];
+			a[0]=cursor;
+			a[1]=y;
+			a[2]=cursor+width;
+			a[3]=y;
+			a[4]=cursor+width;
+			a[5]=y+height+1;
+			a[6]=cursor;
+			a[7]=y+height+1;
+			fillpoly(4,a);
+
+			setcolor(fore);
+			outtextxy(cursor,y-10,tempstr);
+			cursor+=width;
+			}
+		}
+		else if( ch==8 )	//code for Backspace
+		{
+			if(i>0)
+			{
+				buffer[--i]='\0';
+				cursor-=width;
+
+				//clear out a rectangle of widthXheight
+				setcolor(back);
+				setfillstyle(1,back);
+				int a[8];
+				a[0]=cursor;
+				a[1]=y;
+				a[2]=cursor+width;
+				a[3]=y;
+				a[4]=cursor+width;
+				a[5]=y+height+1;
+				a[6]=cursor;
+				a[7]=y+height+1;
+				fillpoly(4,a);
+
+				setcolor(fore);
+			sound(2000);delay(50);nosound();
+			}
+		}
+		else if( ch==13 )	//The Enter key was pressed.
+		{			//You can put a similar exit
+		   break;		//for Esc key (ch==27)
+		}
+	}
+	setcolor(fore);
+	//return buffer;
+
+     }
+
+
+void main()
+{
+ int d=DETECT,m;
+ initgraph(&d,&m,"c:\\tc\\bgi");
+ int jo=0;
+ ifstream ifile;
+ ifile.open("c:\\tc\\XII\\proj\\score");
+ifile.read((char*)&n,sizeof(n));
+cout<<n.k<<n.buffer;
+
+while(jo<=n.k)
+{
+n.disp();
+jo++;
+ifile.read((char*)&n,sizeof(n));
+}
+ifile.close();
+getch();
+
+}

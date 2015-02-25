@@ -1,0 +1,25 @@
+#include<iostream.h>
+#include<conio.h>
+
+struct col
+{
+col *next,*pre;
+char name[30];
+};
+
+struct table
+{
+table *next,*pre;
+col *ptr2;
+
+char name[30]; 
+
+}*ptr1;
+
+
+
+void main()
+{
+
+
+}

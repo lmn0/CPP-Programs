@@ -1,0 +1,187 @@
+#include<iostream.h>
+#include<conio.h>
+#include<iostream.h>
+#include<conio.h>
+#include<graphics.h>
+ #include<stdio.h>
+       #include<conio.h>
+       #include<dos.h>
+       union REGS in,out;
+
+       int callmouse()
+       {
+	     in.x.ax=1;
+	     int86(51,&in,&out);
+              return 1;
+       }
+       void mouseposi(int &xpos,int &ypos,int &click)
+       { 
+	     in.x.ax=3;
+	     int86(51,&in,&out);
+	     click=out.x.bx;
+	     xpos=out.x.cx;
+	     ypos=out.x.dx;
+        }
+       int mousehide()
+       {
+	     in.x.ax=2;
+	     int86(51,&in,&out);
+              return 1;
+       }
+      void setposi(int &xpos,int &ypos)
+      { 
+             in.x.ax=4;
+             in.x.cx=xpos;
+	    in.x.dx=ypos;
+	    int86(51,&in,&out);
+      }
+      void restrictmouseptr(int x1,int y1,int x2,int y2)
+          {
+                 in.x.ax=7;
+	        in.x.cx=x1;
+                 in.x.dx=x2;
+	        int86(51,&in,&out);
+	        in.x.ax=8;
+                 in.x.cx=y1;
+	        in.x.dx=y2;
+                 int86(51,&in,&out);
+	 }
+
+
+ void main()
+ {
+ int d=DETECT,m;int cl,x,y,i=1;
+ initgraph(&d,&m,"c:\\tc\\bgi");
+ restrictmouseptr(0,0,635,400);
+ callmouse();          char ch;
+	int flag,p=-1,b[2]={1,2},first=0;
+	setcolor(RED);
+	outtextxy(0,10,"Do you want the computer to make the first move?");
+	bar(0,20,50,40);
+	setcolor(BLUE);
+	outtextxy(15,27,"YES");
+				    i=1;
+	bar(60,20,110,40);
+	setcolor(BLUE);
+	outtextxy(75,27,"NO");
+
+	while(ch!=27)
+	{
+	mouseposi(x,y,cl);
+
+	if(i%10000==0)
+	{
+	bar(0,20,50,40);
+	setcolor(BLUE);
+	outtextxy(15,27,"YES");
+
+	bar(60,20,110,40);
+	setcolor(BLUE);
+	outtextxy(75,27,"NO");
+	}
+
+	if(cl==1 && x>0 && x<50 && y>20 && y<40)
+	{first=1;break;}
+	if(cl==1 && x>60 && x<110 && y>20 && y<40)
+	{first=0;break;}
+
+	i++;
+	if(kbhit()!=0)
+	ch=getch();
+
+	}
+	mousehide();
+	cleardevice();
+	callmouse();
+	ch='a';
+
+	bar(450,30,470,50);
+	bar(450,70,470,90);
+	setfillstyle(SOLID_FILL,RED);
+	bar((450+470)/2-1,35,(450+470)/2+1,45);
+	setfillstyle(SOLID_FILL,RED);
+	bar((450+470)/2-3,75,(450+470)/2+3,85);
+	setcolor(BLUE);     cl=-1;
+	outtextxy(100,0,"TREE GAME");
+     i=0;int c=-1,j=1,t=0,k=0,l=0,tx=(250)/2,ty=191,f=125,o=1;
+     setfillstyle(SOLID_FILL,WHITE);
+     bar(100,50,350,200);
+
+ while(ch!=27)
+ {
+
+ while(k<=t)
+ {
+ if(i%2==0 && first==0 || first==1 && i%2!=0)
+ {
+ setcolor(BLACK);
+ outtextxy(500,250,"Comp's turn");
+ setcolor(BLUE);
+ outtextxy(500,250,"Palyer's turn");
+ while(1)
+ {
+ mouseposi(x,y,cl);
+ if(cl==1 && x>450 && y>30 && x<470 && y<50)
+ {p=1;break;}
+ if(cl==1 && x>450 && y>70 && x<470 && y<90)
+ {p=2;break;}
+ }
+ setfillstyle(SOLID_FILL,WHITE);
+ bar(450,30,470,50);
+ bar(450,70,470,90);
+ setfillstyle(SOLID_FILL,RED);
+ bar((450+470)/2-1,35,(450+470)/2+1,45);
+ setfillstyle(SOLID_FILL,RED);
+ bar((450+470)/2-3,75,(450+470)/2+3,85);
+ l=l+p;
+
+ }
+
+ if(i%2==0 && first==1 || first==0 && i%2!=0)
+ {
+ if(l%2!=0)
+ c=2;
+ else
+ c=1;
+ l=l+c;
+ setcolor(BLACK);
+ outtextxy(500,250,"Palyer's turn");
+ setcolor(BLUE);
+ outtextxy(500,250,"Comp's turn");
+ delay(500);
+ }
+ if(p==2 || c==2)
+ {
+ setfillstyle(SOLID_FILL,RED);
+ bar(100+o*f-3,ty,100+o*f+3,ty+10);
+ }
+
+ if(p==1 || c==1)
+ {
+ setfillstyle(SOLID_FILL,RED);
+ bar(100+o*f-1,ty,100+o*f+1,ty+10);
+ }
+ o++;
+ i++;k++;
+ }
+
+ k=0;t=l;l=0;j++;
+ f=200/(t+1);
+ ty=ty-12;
+ o=1;
+ if(j==10)
+ {i--;break;}
+
+ if(kbhit()!=0)
+ ch=getch();
+ }
+ mousehide();
+ cleardevice();
+ if(first==1 && i%2==0 || first==0 && i%2!=0)
+ outtextxy(0,10,"Computer is the winner");
+
+ if(first==0 && i%2==0 || first==1 && i%2!=0)
+ outtextxy(0,10,"You won the game !!");
+ getch();
+
+ }

@@ -1,0 +1,50 @@
+#include<iostream.h>
+#include<conio.h>
+#include<process.h>
+void main()
+{
+char a[100],ch;
+int m=0,i,n,j;
+cin>>n;
+gets(a);
+
+for(i=0;i<n;i++)
+if(a[i]>='A' && a[i]<='M')
+m++;
+if(a[i]<='Z' && a[i]>'M')
+m--;
+
+if(m!=0)
+{cout<<0;exit(0);}
+
+for(i=n-1;i>=0;i--)
+{
+if(a[i]>='A' && a[i]<='M')
+{
+m=1;
+ch=156-a[i];
+
+for(j=i+1;a[j]!=ch && j<n;j++)
+{
+if(a[i]>='A' && a[i]<='M')
+m++;
+if(a[i]<='Z' && a[i]>'M')
+m--;
+}
+if(a[j]==ch)
+m--;
+
+if(m!=0)
+break;
+
+}
+}
+
+if(m!=0)
+cout<<0;
+else
+cout<<1;
+
+
+getch();
+}

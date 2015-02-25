@@ -1,0 +1,31 @@
+#include<iostream.h>
+#include<process.h>
+#include<conio.h>
+void main()
+{
+clrscr();
+int a[80][80],b[80][80],m,n,p,q,c[80][80],i,j;
+cout<<"enter row and col of A and B in order :\n";
+cin>>m>>n>>p>>q;
+cout<<"\nenter A:";
+for(i=0;i<m;i++)
+for(j=0;j<n;j++)
+cin>>a[i][j];
+cout<<"\nenter B:";
+for(i=0;i<p;i++)
+for(j=0;j<q;j++)
+cin>>b[i][j];
+if(m!=q || n!=p)
+exit(0);
+else
+for(i=0;i<m;i++)
+for(j=0;j<n;j++)
+c[i][j]=a[i][j]*b[j][i];
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+cout<<c[i][j]<<" ";
+cout<<endl;
+}
+getch();
+}

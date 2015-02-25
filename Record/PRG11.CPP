@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include<iostream.h>
+#include<ctype.h>
+#include <conio.h>
+
+class employee
+{
+private:
+	int empno;
+	char name[15];
+	float bas,da,hra,pf,tax,net;
+	float calnet()
+	{
+	return (bas+da+hra-pf-tax+net);
+	}
+public:
+	void readdata()
+	{
+	cout<<"\nEmployee number :";
+	cin>>empno;
+	cout<<"\nName :";
+	gets(name);
+	cout<<"\nSalary :";
+	cin>>bas;
+	}
+
+	void calculate()
+	{
+
+	if(bas<2000)
+	{da=(float)(0.12*bas);hra=400;}
+
+	if(bas>=2000 && bas<5000)
+	{da=(float)(0.15*bas);hra=500;}
+
+	if(bas>=5000 && bas<10000)
+	{da=(float)(0.4*bas);hra=600;}
+
+	if(bas<=1000)tax=0;
+
+	if(bas>1000 && bas<=4000)tax=(float)0.2*bas;
+
+	if(bas>4000 && bas<=15000)tax=(float)0.25*bas;
+
+	if(bas>15000)tax=(float)0.3*bas;
+
+	net=calnet();
+	}
+
+	void display()
+	{
+	cout<<"\nEmployee :"<<empno;
+	cout<<"\nName :"<<name;
+	cout<<"\nBasic :"<<bas;
+	cout<<"\nDA :"<<(float)da;
+	cout<<"\nHRA :"<<(float)hra;
+	cout<<"\nPF :"<<(float)pf;
+	cout<<"\nTAX :"<<(float)tax<<endl;
+	}
+
+} e[100];
+
+void main()
+{
+	int g,n,i;
+	char ch;
+
+	do{ clrscr();
+	cout<<"MENU\n1)Accept\n2)Diplay\n";
+	cin>>g;
+	switch(g){
+	case 1:cout<<"\nEnter no of employees ";cin>>n;
+	       for(i=0;i<n;i++)
+	       {e[i].readdata();e[i].calculate();}break;
+	case 2:for(i=0;i<n;i++)
+	       e[i].display();break;
+
+	default:cout<<"\nSorry";    break;
+	}
+	cout<<"\nDo u want to repeat ?";
+	cin>>ch;
+	}while(ch=='y');
+}
+
+
+
+

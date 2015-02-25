@@ -1,0 +1,48 @@
+#include<iostream.h>
+#include<string.h>
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+char s1[10],s2[10];
+gets(s1);
+gets(s2);
+
+int n=0;
+for(int i=0;i<strlen(s1);i++)
+for(int j=0;j<strlen(s2);j++)
+{
+if(s1[i]==s2[j])
+{s1[i]='/';s2[i]='/';break;}
+}
+
+for(i=0;i<strlen(s1);i++)
+if(s1[i]!='/')
+n++;
+
+for(i=0;i<strlen(s2);i++)
+if(s2[i]!='/')
+n++;
+
+char fl={"flames\0"};
+
+int m=6,p=0,t=0;
+while(m!=0)
+{
+p=0;
+t=n%m;
+m--;
+
+for(i=0;p!=t ;i=(i+1)%6)
+{
+if(fl[i]!='/')
+p++;
+}
+fl[i]='/';
+
+}
+for(i=0;i<6;i++)
+if(fl[i]!='/')
+cout<<fl[i];
+
+}

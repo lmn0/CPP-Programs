@@ -1,0 +1,32 @@
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+clrscr();
+int n,i,j,pos;
+float a[100],b,temp,temp1;
+cout<<"Enter the total elements\n";
+cin>>n;
+cout<<"Enter the int no.s in ascending order\n";
+for(i=0;i<n;i++)
+cin>>a[i];
+cout<<"Enter a int no.";
+cin>>b;
+for(i=0;i<n;i++)
+if(b>a[i] && b<a[i+1])
+{
+for(int m=0;m<n;m++)
+if(b>a[m] && b<a[m+1])
+{
+pos=m+1;
+break;
+}
+for(j=n;j>=pos;j--)
+{a[j]=a[j-1];}
+a[m+1]=b;
+}
+cout<<"\nSorted array\n";
+for(i=0;i<n+1;i++)
+cout<<a[i]<<" ";
+getch();
+}

@@ -1,0 +1,41 @@
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+clrscr();
+float cu,pr,bill=0,di;
+cout<<"Enter the current reading :";
+cin>>cu;
+cout<<"\nEnter the previous reading :";
+cin>>pr;
+di=cu-pr;
+cout<<"Di ="<<di;
+if(di<=100 || di>0)
+{
+	if(di-100>0)
+	bill+=100*2.0;
+	else
+	bill+=di*2.0;
+	di=di-100;
+}
+if(di>=200 || di>0)
+{
+	if(di-200>0)
+	bill+=(200)*2.5;
+	else
+	bill+=di*2.5;
+	di=di-200;
+}
+if(di>=200 || di>0)
+{
+	if(di-200>0)
+	bill+=(200)*3.0;
+	else
+	bill+=di*3.0;
+	di=di-200;
+}
+if(di>0)
+	bill+=di*3.5;
+cout<<"\n\nBill ="<<bill;
+getch();
+}

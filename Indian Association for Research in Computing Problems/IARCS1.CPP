@@ -1,0 +1,27 @@
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+int n[10][3]={{1,2,5},{5,2,6},{1,3,8},{8,1,11},{1,1,6},{10,1,6},{11,3,6},{10,4,8},{10,1,11}},a,b,m,na=0,nb=0,i,j;
+cin>>m>>a>>b;
+for(i=0;i<10;i++)
+if((n[i][0]==a || n[i][2]==a) && n[i][0]!=n[i][2])
+na++;
+
+for(i=0;i<10;i++)
+if((n[i][0]==b || n[i][2]==b) && n[i][0]!=n[i][2])
+nb++;
+
+
+int k=na*nb,val[20],ta,tb;
+
+for(i=0;i<k;i++)
+{
+
+for(;i<10;i++)
+if(n[i][0]==ta){ta=a;break;}
+if(n[i][2]==ta){ta=a;break;}
+
+}
+
+}

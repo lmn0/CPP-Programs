@@ -1,0 +1,1 @@
+Everything in this rep is developed during my high school (2005-2006) in Turbo C++ on a 32 bit OS. 

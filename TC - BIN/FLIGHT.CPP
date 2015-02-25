@@ -1,0 +1,131 @@
+#include<iostream.h>
+#include<process.h>
+#include<dos.h>
+#include<conio.h>
+#include<stdio.h>
+class flight
+{
+public:
+int flno,atime,dtime,status;
+char flnam[20];
+flight *next;
+flight()
+{
+flno=atime=dtime=status=-1;
+}
+void getd()
+{
+cout<<"\nEnter the flight name :";
+gets(flnam);
+cout<<"Enter the flight no.:";
+cin>>flno;
+cout<<"Enter the flight arrival time in 24hrs format :";
+cin>>atime;
+cout<<"Enter the flight departure time in 24hrs format :";
+cin>>dtime;
+}
+
+}*front,*rear;
+
+void enque()
+{
+flight *ptr;
+ptr=new flight;
+ptr->getd();
+ptr->next=NULL;
+if(front==NULL)
+front=ptr;
+else
+rear->next=ptr;
+rear=ptr;
+}
+
+void deque(int t)
+{
+flight *ptr,*prev;
+ptr=front;
+
+if(front!=rear)
+while(ptr!=rear)
+{
+if(t==ptr->dtime)
+{
+if(ptr==front)
+front=ptr->next;
+else
+prev->next=ptr->next;
+break;
+}
+prev=ptr;
+ptr=ptr->next;
+}
+else if(t==ptr->dtime)
+front=rear=NULL;
+}
+
+void arrive(int t)
+{
+flight *ptr;
+ptr=front;
+if(front!=rear)
+while(ptr!=rear)
+{
+if(t==ptr->atime)
+{
+ptr->status=1;
+break;
+}
+ptr=ptr->next;
+}
+}
+
+void disp(int t)
+{
+flight *ptr;
+ptr=front;
+cout<<"TIME : "<<t<<"\n\n";
+cout<<"FLIGHT NO\t\tFLIGHT NAME\t\tARRIVAL TIME\t\tDEPARTURE TIME\t\tSTATUS\n";
+while(ptr!=rear)
+{
+cout<<ptr->flno<<"\t\t"<<ptr->flnam<<"\t\t"<<ptr->atime<<"\t\t"<<ptr->dtime<<"\t\t";
+if(ptr->status==-1)
+cout<<"On time\n\n";
+else
+cout<<"Arrived\n\n";
+ptr=ptr->next;
+}
+
+}
+
+void timing()
+{
+int tym=0;
+
+while(tym!=2359)
+{
+clrscr();
+tym=(tym+1)%2400;
+
+arrive(tym);
+deque(tym);
+disp(tym);
+delay(150);
+}
+}
+
+
+void main()
+{
+int ch;
+while(1)
+{
+cout<<"\t\t\tMENU\n\t\t1)Enter a new flight\n\t\t2)Enter display screen\n\t\t3)exit\nchoice :";
+cin>>ch;
+switch(ch)
+{
+case 1:enque();break;
+case 2:timing();
+case 3:exit(0);
+}
+}
+}

@@ -1,0 +1,27 @@
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+void main()
+{
+int m,n,a[80][80],i,j;
+cout<<"Enter the no. of rows and column :\n";
+cin>>m>>n;
+cout<<"Elements :";
+for(i=0;i<m;i++)
+for(j=0;j<n;j++)
+cin>>a[i][j];
+if(m!=n)
+{
+cout<<"NOT A SQUARE";
+exit0;
+}
+cout<<"\n\n";
+for(i=0;i<m;i++)
+{
+for(j=0;j<n;j++)
+cout<<a[i][j];
+cout<<endl;
+}
+for(i=0;i<m;i++)
+for(j=0;j<n-i-1;j++)
+

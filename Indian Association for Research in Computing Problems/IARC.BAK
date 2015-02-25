@@ -1,0 +1,32 @@
+#include<iostream.h>
+#include<conio.h>
+
+void main()
+{
+clrscr();
+int a,n[9],m,k,j,i,flag=0;
+cin>>a;
+
+for(i=a;;i++)
+{
+flag=0;
+k=i;
+for(j=0;k>0;j++)
+{
+n[j]=k%10;
+k=k/10;
+}
+for(k=0;k<j-1;k++)
+{
+for(m=k+1;m<j;m++)
+if(n[k]==n[m] || n[k]==0)
+{flag=1;break;}
+if(flag==0)
+{goto x;}
+else break;
+}
+
+}
+x:cout<<i;
+}
+

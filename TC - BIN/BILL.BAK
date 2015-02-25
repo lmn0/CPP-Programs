@@ -1,0 +1,17 @@
+#include<conio.h>
+#include<iostream.h>
+void main()
+{
+clrscr();
+char a[20];
+float b,c,d;
+cout<<"Enter your name\n";
+cin>>a;
+cout<<""<<a<<"'s current reading: \n";
+cin>>b;
+cout<<""<<a<<"'s prevoius reading: \n";
+cin>>c;
+d=(b-c)*.08;
+cout<<"\n\nBILL= QR. "<<d;
+getch();
+}

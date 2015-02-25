@@ -1,0 +1,34 @@
+#include<iostream.h>
+#include<string.h>
+#include<stdio.h>
+#include<process.h>
+#include<conio.h>
+void main()
+{
+clrscr();
+char a[80],b[80];
+int i,j,k,len1,len2,flag=1,pos=0,g=0;
+cout<<"Main: ";
+gets(a);
+len1=strlen(a);
+cout<<"Sub :";
+gets(b);
+len2=strlen(b);
+for(i=0;i<len1;i++)
+if(a[i]==b[0])
+{
+flag=1;
+for(j=i,g=0;j<len2+i;j++,g++)
+if(a[j]!=b[g])
+{
+flag=0;
+break;
+}
+if(flag==1)
+{
+pos=i;
+cout<<pos+1<<",";
+}
+}
+getch();
+}
